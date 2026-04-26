@@ -50,6 +50,10 @@
                 <a href="FinancialEntry.aspx">Financial Entry</a>
                 <a href="ApproveRequests.aspx">Approvals</a>
                 <a href="InventoryStatus.aspx">Inventory</a>
+                <a href="AssignTeam.aspx">Assign Team</a>
+                <a href="TeamStatusUpdate.aspx">Update Team Status</a>
+                <a href="AuditLogs.aspx">Audit Logs</a>
+                <a href="MISReports.aspx">MIS Reports</a>
             </div>
 
             <div class="stat-cards">

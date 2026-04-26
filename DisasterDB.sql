@@ -867,3 +867,8 @@ PRINT '========================================';
 PRINT ' Ready for ASP.NET Web Forms connection!';
 PRINT '========================================';
 GO
+
+INSERT INTO APPROVAL_REQUESTS (RequestType, ReferenceID, RequestedByUserID, Status)
+VALUES ('ResourceDistribution', 1, 4, 'Pending');
+
+SELECT * FROM APPROVAL_REQUESTS WHERE Status = 'Pending';

@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -94,12 +97,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="MISReports.aspx" />
+    <Content Include="AuditLogs.aspx" />
+    <Content Include="TeamStatusUpdate.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -122,6 +123,11 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="FinancialEntry.aspx" />
+    <Content Include="ApproveRequests.aspx" />
+    <Content Include="InventoryStatus.aspx" />
+    <Content Include="AssignTeam.aspx" />
+    <Content Include="ResourceRequest.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="NewEmergencyReport.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -186,6 +192,27 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MISReports.aspx.cs">
+      <DependentUpon>MISReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MISReports.aspx.designer.cs">
+      <DependentUpon>MISReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AuditLogs.aspx.cs">
+      <DependentUpon>AuditLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuditLogs.aspx.designer.cs">
+      <DependentUpon>AuditLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeamStatusUpdate.aspx.cs">
+      <DependentUpon>TeamStatusUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeamStatusUpdate.aspx.designer.cs">
+      <DependentUpon>TeamStatusUpdate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -218,6 +245,41 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="FinancialEntry.aspx.cs">
+      <DependentUpon>FinancialEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FinancialEntry.aspx.designer.cs">
+      <DependentUpon>FinancialEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApproveRequests.aspx.cs">
+      <DependentUpon>ApproveRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApproveRequests.aspx.designer.cs">
+      <DependentUpon>ApproveRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryStatus.aspx.cs">
+      <DependentUpon>InventoryStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventoryStatus.aspx.designer.cs">
+      <DependentUpon>InventoryStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AssignTeam.aspx.cs">
+      <DependentUpon>AssignTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AssignTeam.aspx.designer.cs">
+      <DependentUpon>AssignTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceRequest.aspx.cs">
+      <DependentUpon>ResourceRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResourceRequest.aspx.designer.cs">
+      <DependentUpon>ResourceRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
