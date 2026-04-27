@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AuditLogs.aspx.cs" Inherits="DisasterProject.AuditLogs" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmergencyReports.aspx.cs" Inherits="DisasterProject.EmergencyReports" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Audit Trail – Disaster MIS</title>
+    <title>Emergency Reports – Disaster MIS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body { background: #e8f0f8; font-family: 'Segoe UI', sans-serif; margin: 0; }
@@ -16,7 +16,7 @@
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th { background: #0b3b5f; color: white; padding: 10px; }
         td { padding: 10px; border-bottom: 1px solid #ddd; }
-        .btn-refresh { background: #0b3b5f; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; margin-bottom: 15px; }
+        tr:hover { background: #f5f8fc; }
     </style>
 </head>
 <body>
@@ -27,12 +27,9 @@
         </div>
         <div class="container-main">
             <div class="card">
-                <h4>Audit Trail</h4>
-                <asp:GridView ID="gvAuditLogs" runat="server" AutoGenerateColumns="True" CssClass="table table-bordered"
-                    HeaderStyle-BackColor="#0b3b5f" HeaderStyle-ForeColor="White" AllowPaging="True" PageSize="20"
-                    OnPageIndexChanging="gvAuditLogs_PageIndexChanging" />
-                 <asp:Button ID="btnRefresh" runat="server" Text="Refresh" CssClass="btn-refresh" OnClick="btnRefresh_Click" />
-               
+                <h4>All Emergency Reports</h4>
+                <asp:GridView ID="gvReports" runat="server" AutoGenerateColumns="True" CssClass="table table-bordered"
+                    HeaderStyle-BackColor="#0b3b5f" HeaderStyle-ForeColor="White" />
             </div>
         </div>
     </form>

@@ -55,9 +55,13 @@
                 </asp:DropDownList>
 
                 <br />
-                <asp:Button ID="btnSubmit" runat="server" Text="CREATE REPORT" CssClass="btn-submit" OnClick="btnSubmit_Click" />
-                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn-cancel" OnClick="btnCancel_Click" />
-
+                <br/>
+<div style="display:flex; gap:15px; align-items:center; margin-top:15px;">
+    <asp:Button ID="btnSubmit" runat="server" Text="CREATE REPORT" CssClass="btn-submit" 
+        OnClick="btnSubmit_Click" style="padding:8px 20px; font-size:14px;" />
+    <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn-cancel" 
+        OnClick="btnCancel_Click" style="padding:8px 20px; font-size:14px;" />
+</div>
                 <asp:Label ID="lblMessage" runat="server" CssClass="msg" />
             </div>
         </div>

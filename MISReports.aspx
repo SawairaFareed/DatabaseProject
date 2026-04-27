@@ -28,7 +28,7 @@
         <div class="container-main">
             <div class="card">
                 <h5>Incident Statistics by Severity</h5>
-                <canvas id="chartSeverity" width="400" height="200"></canvas>
+                <canvas id="chartSeverity"  width="**220**" height="**140**""></canvas>
             </div>
 
             <div class="card">
@@ -39,7 +39,7 @@
 
             <div class="card">
                 <h5>Resource Utilization (Fulfillment %)</h5>
-                <canvas id="chartFulfillment" width="400" height="200"></canvas>
+                <canvas id="chartFulfillment" width="**220**" height="**140**"></canvas>
             </div>
 
             <div class="card">

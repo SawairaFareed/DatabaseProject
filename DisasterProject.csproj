@@ -98,6 +98,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AddResource.aspx" />
+    <Content Include="AddRescueTeam.aspx" />
+    <Content Include="EmergencyReports.aspx" />
+    <Content Include="RegisterUser.aspx" />
     <Content Include="MISReports.aspx" />
     <Content Include="AuditLogs.aspx" />
     <Content Include="TeamStatusUpdate.aspx" />
@@ -192,6 +196,34 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddResource.aspx.cs">
+      <DependentUpon>AddResource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddResource.aspx.designer.cs">
+      <DependentUpon>AddResource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddRescueTeam.aspx.cs">
+      <DependentUpon>AddRescueTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddRescueTeam.aspx.designer.cs">
+      <DependentUpon>AddRescueTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyReports.aspx.cs">
+      <DependentUpon>EmergencyReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmergencyReports.aspx.designer.cs">
+      <DependentUpon>EmergencyReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterUser.aspx.cs">
+      <DependentUpon>RegisterUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterUser.aspx.designer.cs">
+      <DependentUpon>RegisterUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MISReports.aspx.cs">
       <DependentUpon>MISReports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

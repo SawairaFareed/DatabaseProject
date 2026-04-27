@@ -14,6 +14,13 @@ namespace DisasterProject
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
+            string selectedRole = ddlRole.SelectedValue;
+
+            if (string.IsNullOrEmpty(selectedRole))
+            {
+                Response.Write("<script>alert('Please select a role!');</script>");
+                return;
+            }
 
             string connString = ConfigurationManager.ConnectionStrings["DisasterDB"].ConnectionString;
 
@@ -23,11 +30,13 @@ namespace DisasterProject
                                  FROM USERS u
                                  JOIN USER_ROLES ur ON u.UserID = ur.UserID
                                  JOIN ROLES r ON ur.RoleID = r.RoleID
-                                 WHERE u.Username = @user AND u.PasswordHash = @pass AND u.IsActive = 1";
+                                 WHERE u.Username = @user AND u.PasswordHash = @pass 
+                                   AND r.RoleName = @role AND u.IsActive = 1";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@user", username);
                 cmd.Parameters.AddWithValue("@pass", password);
+                cmd.Parameters.AddWithValue("@role", selectedRole);
 
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -41,7 +50,7 @@ namespace DisasterProject
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid credentials!');</script>");
+                    Response.Write("<script>alert('Invalid credentials or role!');</script>");
                 }
             }
         }

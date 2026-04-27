@@ -53,6 +53,19 @@ namespace DisasterProject
                 cmd.Parameters.AddWithValue("@id", approvalId);
                 conn.Open();
                 cmd.ExecuteNonQuery();
+                
+                if (newStatus == "Approved")
+                {
+                     string getRefQuery = "SELECT ReferenceID FROM APPROVAL_REQUESTS WHERE ApprovalID = @id";
+                    SqlCommand refCmd = new SqlCommand(getRefQuery, conn);
+                    refCmd.Parameters.AddWithValue("@id", approvalId);
+                    int refId = Convert.ToInt32(refCmd.ExecuteScalar());
+
+                    string updateAlloc = "UPDATE RESOURCE_ALLOCATIONS SET Status = 'Approved' WHERE AllocationID = @refId";
+                    SqlCommand allocCmd = new SqlCommand(updateAlloc, conn);
+                    allocCmd.Parameters.AddWithValue("@refId", refId);
+                    allocCmd.ExecuteNonQuery();
+                }
             }
 
             lblMessage.Text = $"Request {newStatus}.";

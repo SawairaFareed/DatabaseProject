@@ -14,7 +14,8 @@
         .form-control { border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin-bottom: 15px; width: 100%; box-sizing: border-box; }
         .btn-login { background: #0b3b5f; color: #fff; font-weight: bold; border: none; border-radius: 5px; padding: 12px; width: 100%; font-size: 16px; cursor: pointer; margin-top: 10px; }
         .btn-login:hover { background: #0a2f4a; }
-        .forgot-link { display: block; text-align: center; margin-top: 15px; color: #999; font-size: 13px; text-decoration: none; }
+        .register-link { display: block; text-align: center; margin-top: 15px; color: #0b3b5f; font-size: 14px; text-decoration: none; font-weight: bold; }
+        .register-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -22,13 +23,26 @@
         <div class="login-card">
             <h2>DISASTER RESPONSE MIS</h2>
             <p class="subtitle">Smart Disaster Response Management</p>
+
+            <label>Login As *</label>
+            <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-control">
+                <asp:ListItem Text="-- Select Role --" Value="" />
+                <asp:ListItem Text="Administrator" Value="Administrator" />
+                <asp:ListItem Text="Emergency Operator" Value="Emergency Operator" />
+                <asp:ListItem Text="Field Officer" Value="Field Officer" />
+                <asp:ListItem Text="Warehouse Manager" Value="Warehouse Manager" />
+                <asp:ListItem Text="Finance Officer" Value="Finance Officer" />
+            </asp:DropDownList>
+
             <label>Username</label>
             <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" placeholder="Enter username" />
+
             <label>Password</label>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" placeholder="Enter password" />
-            <asp:CheckBox ID="chkRemember" runat="server" Text=" Remember me" />
+
             <asp:Button ID="btnLogin" runat="server" Text="SIGN IN" CssClass="btn-login" OnClick="btnLogin_Click" />
-            <a href="#" class="forgot-link">Forgot password?</a>
+
+            <a href="RegisterUser.aspx" class="register-link">Not registered? Register Now</a>
         </div>
     </form>
 </body>

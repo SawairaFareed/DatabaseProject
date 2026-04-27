@@ -17,18 +17,19 @@
         .stat-card { background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 200px; border-left: 5px solid #0b3b5f; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .stat-card .number { font-size: 32px; font-weight: bold; color: #0b3b5f; }
         .stat-card .label { color: #666; font-size: 14px; }
+        .nav-links { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+        .link-group { background: white; border-radius: 8px; padding: 15px; flex: 1; min-width: 180px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .link-group b { color: #0b3b5f; display: block; margin-bottom: 10px; }
+        .link-group a { display: block; margin-bottom: 6px; color: #333; text-decoration: none; font-size: 14px; }
+        .link-group a:hover { color: #0b3b5f; }
         .charts-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .chart-box { background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 400px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .chart-box { background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .chart-box h5 { color: #0b3b5f; font-weight: bold; margin-bottom: 15px; }
         .table-box { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .table-box h5 { color: #0b3b5f; font-weight: bold; margin-bottom: 15px; }
-        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 25px; }
-        .nav-links a { background: white; color: #0b3b5f; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .nav-links a:hover { background: #0b3b5f; color: white; }
         table { width: 100%; border-collapse: collapse; }
         th { background: #0b3b5f; color: white; padding: 10px; text-align: left; }
         td { padding: 10px; border-bottom: 1px solid #ddd; }
-        tr:hover { background: #f5f8fc; }
     </style>
 </head>
 <body>
@@ -43,19 +44,41 @@
         </div>
 
         <div class="container-main">
+            <!-- Navigation categories -->
             <div class="nav-links">
-                <a href="NewEmergencyReport.aspx">+ New Report</a>
-                <a href="EmergencyReports.aspx">View Reports</a>
-                <a href="ResourceRequest.aspx">Request Resources</a>
-                <a href="FinancialEntry.aspx">Financial Entry</a>
-                <a href="ApproveRequests.aspx">Approvals</a>
-                <a href="InventoryStatus.aspx">Inventory</a>
-                <a href="AssignTeam.aspx">Assign Team</a>
-                <a href="TeamStatusUpdate.aspx">Update Team Status</a>
-                <a href="AuditLogs.aspx">Audit Logs</a>
-                <a href="MISReports.aspx">MIS Reports</a>
+                <div class="link-group">
+                    <b>📋 Reports</b>
+                    <a href="NewEmergencyReport.aspx">New Report</a>
+                    <a href="EmergencyReports.aspx">View Reports</a>
+                </div>
+                <div class="link-group">
+                    <b>📦 Resources</b>
+                    <a href="ResourceRequest.aspx">Request Resources</a>
+                    <a href="InventoryStatus.aspx">Inventory</a>
+                    <a href="AddResource.aspx">Add Resource</a>
+                </div>
+                <div class="link-group">
+                    <b>🚑 Teams</b>
+                    <a href="AssignTeam.aspx">Assign Team</a>
+                    <a href="AddRescueTeam.aspx">Add Team</a>
+                </div>
+                <div class="link-group">
+                    <b>💰 Finance</b>
+                    <a href="FinancialEntry.aspx">Financial Entry</a>
+                </div>
+                <div class="link-group">
+                    <b>🔒 Admin</b>
+                    <a href="ApproveRequests.aspx">Approvals</a>
+                    <a href="AuditLogs.aspx">Audit Logs</a>
+                </div>
+                <div class="link-group">
+                    <b>📊 Reports & Status</b>
+                    <a href="TeamStatusUpdate.aspx">Update Team Status</a>
+                    <a href="MISReports.aspx">MIS Reports</a>
+                </div>
             </div>
 
+            <!-- Stat Cards -->
             <div class="stat-cards">
                 <div class="stat-card">
                     <div class="number"><asp:Label ID="lblOpenIncidents" runat="server" Text="0" /></div>
@@ -75,20 +98,23 @@
                 </div>
             </div>
 
+            <!-- Charts -->
             <div class="charts-row">
                 <div class="chart-box">
                     <h5>Incidents by Disaster Type</h5>
-                    <canvas id="chartIncidents" width="400" height="250"></canvas>
+                    <canvas id="chartIncidents" width="250" height="160"></canvas>
                 </div>
                 <div class="chart-box">
                     <h5>Resource Fulfillment</h5>
-                    <canvas id="chartResources" width="400" height="250"></canvas>
+                    <canvas id="chartResources" width="250" height="160"></canvas>
                 </div>
             </div>
 
+            <!-- Recent Reports -->
             <div class="table-box">
                 <h5>Recent Emergency Reports</h5>
-                <asp:GridView ID="gvRecentReports" runat="server" AutoGenerateColumns="True" CssClass="table" />
+                <asp:GridView ID="gvRecentReports" runat="server" AutoGenerateColumns="True" CssClass="table"
+                    HeaderStyle-BackColor="#0b3b5f" HeaderStyle-ForeColor="White" />
             </div>
         </div>
     </form>
@@ -103,7 +129,7 @@
                 datasets: [{
                     label: 'Incidents',
                     data: [<asp:Literal ID="litChartData" runat="server" />],
-                    backgroundColor: ['#0b3b5f','#1a5276','#2e86c1','#85c1e9']
+                    backgroundColor: ['#0b3b5f', '#1a5276', '#2e86c1', '#85c1e9']
                 }]
             }
         });
@@ -115,7 +141,7 @@
                 labels: [<asp:Literal ID="litResLabels" runat="server" />],
                 datasets: [{
                     data: [<asp:Literal ID="litResData" runat="server" />],
-                    backgroundColor: ['#0b3b5f','#1a5276','#2e86c1','#85c1e9','#aed6f1']
+                    backgroundColor: ['#0b3b5f', '#1a5276', '#2e86c1', '#85c1e9', '#aed6f1']
                 }]
             }
         });

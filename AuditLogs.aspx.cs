@@ -25,7 +25,7 @@ namespace DisasterProject
                                         al.RecordID, al.OldValue, al.NewValue, al.Timestamp
                                  FROM AUDIT_LOGS al
                                  LEFT JOIN USERS u ON al.UserID = u.UserID
-                                 ORDER BY al.Timestamp DESC";
+                                 ORDER BY al.Timestamp ASC";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);

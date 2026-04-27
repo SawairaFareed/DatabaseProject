@@ -11,7 +11,7 @@ namespace DisasterProject
 {
 
 
-    public partial class AuditLogs
+    public partial class EmergencyReports
     {
 
         /// <summary>
@@ -24,21 +24,12 @@ namespace DisasterProject
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// gvAuditLogs control.
+        /// gvReports control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvAuditLogs;
-
-        /// <summary>
-        /// btnRefresh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRefresh;
+        protected global::System.Web.UI.WebControls.GridView gvReports;
     }
 }

@@ -9,11 +9,17 @@ namespace DisasterProject
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
-            {
                 Response.Redirect("Login.aspx");
+
+            string role = Session["Role"].ToString();
+            if (role != "Administrator" && role != "Emergency Operator")
+                Response.Redirect("Dashboard.aspx");
+
+            if (!IsPostBack)
+            {
+                // keep existing code here
             }
         }
-
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             string location = txtLocation.Text.Trim();

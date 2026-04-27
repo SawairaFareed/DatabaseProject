@@ -43,7 +43,7 @@ namespace DisasterProject
             {
                 SqlDataAdapter da = new SqlDataAdapter(
                     @"SELECT TransactionID, TransactionType, Amount, TransactionDate, Description 
-                      FROM FINANCIAL_TRANSACTIONS ORDER BY TransactionDate DESC", conn);
+  FROM FINANCIAL_TRANSACTIONS ORDER BY TransactionID ASC", conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 gvTransactions.DataSource = dt;

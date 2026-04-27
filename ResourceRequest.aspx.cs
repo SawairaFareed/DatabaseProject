@@ -73,6 +73,20 @@ namespace DisasterProject
                 cmd.Parameters.AddWithValue("@qty", quantity);
                 conn.Open();
                 cmd.ExecuteNonQuery();
+
+                // Get the new AllocationID
+                string getIdQuery = "SELECT MAX(AllocationID) FROM RESOURCE_ALLOCATIONS";
+                SqlCommand getIdCmd = new SqlCommand(getIdQuery, conn);
+                int allocationId = Convert.ToInt32(getIdCmd.ExecuteScalar());
+
+                // Insert into APPROVAL_REQUESTS
+                string approvalQuery = @"INSERT INTO APPROVAL_REQUESTS 
+    (RequestType, ReferenceID, RequestedByUserID, Status) 
+    VALUES ('ResourceDistribution', @refId, @userId, 'Pending')";
+                SqlCommand approvalCmd = new SqlCommand(approvalQuery, conn);
+                approvalCmd.Parameters.AddWithValue("@refId", allocationId);
+                approvalCmd.Parameters.AddWithValue("@userId", Session["UserID"].ToString());
+                approvalCmd.ExecuteNonQuery();
             }
 
             lblMessage.Text = "Request submitted! Pending approval.";
@@ -81,5 +95,6 @@ namespace DisasterProject
             ddlIncident.SelectedIndex = 0;
             ddlResource.SelectedIndex = 0;
         }
+    
     }
 }

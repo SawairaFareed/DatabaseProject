@@ -59,7 +59,8 @@
 
             <div class="card">
                 <h4>Recent Transactions</h4>
-                <asp:GridView ID="gvTransactions" runat="server" AutoGenerateColumns="True" CssClass="table" />
+             <asp:GridView ID="gvTransactions" runat="server" AutoGenerateColumns="True" CssClass="table" 
+    HeaderStyle-BackColor="#0b3b5f" HeaderStyle-ForeColor="White" />     
             </div>
         </div>
     </form>
