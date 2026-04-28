@@ -13,13 +13,16 @@ namespace DisasterProject
             if (Session["UserID"] == null)
                 Response.Redirect("Login.aspx");
 
+            string role = Session["Role"].ToString();
+            if (role != "Administrator" && role != "Emergency Operator")
+                Response.Redirect("Dashboard.aspx");
+
             if (!IsPostBack)
             {
                 LoadIncidents();
                 LoadTeams();
             }
         }
-
         private void LoadIncidents()
         {
             string connString = ConfigurationManager.ConnectionStrings["DisasterDB"].ConnectionString;

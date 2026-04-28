@@ -12,7 +12,6 @@ namespace DisasterProject
             if (Session["UserID"] == null)
                 Response.Redirect("Login.aspx");
 
-            // Role restriction
             string role = Session["Role"].ToString();
             if (role != "Administrator" && role != "Emergency Operator")
                 Response.Redirect("Dashboard.aspx");
@@ -20,7 +19,6 @@ namespace DisasterProject
             if (!IsPostBack)
                 LoadReports();
         }
-
         private void LoadReports()
         {
             string connString = ConfigurationManager.ConnectionStrings["DisasterDB"].ConnectionString;

@@ -11,6 +11,18 @@
         .topbar h3 { margin: 0; }
         .topbar a { color: #ffcccc; text-decoration: none; }
         .container-main { padding: 30px; }
+        .charts-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+        .chart-box {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 380px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;           
+        }
+        .chart-box h5 { color: #0b3b5f; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
         .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 25px; }
         .card h5 { color: #0b3b5f; font-weight: bold; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
@@ -26,20 +38,21 @@
         </div>
 
         <div class="container-main">
-            <div class="card">
-                <h5>Incident Statistics by Severity</h5>
-                <canvas id="chartSeverity"  width="**220**" height="**140**""></canvas>
+            <div class="charts-row">
+                <div class="chart-box">
+                    <h5>Incident Statistics by Severity</h5>
+                    <canvas id="chartSeverity" width="300" height="200"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h5>Resource Utilization (Fulfillment %)</h5>
+                    <canvas id="chartFulfillment" width="300" height="200"></canvas>
+                </div>
             </div>
 
             <div class="card">
                 <h5>Response Time Summary</h5>
                 <asp:GridView ID="gvResponseTimes" runat="server" AutoGenerateColumns="True" CssClass="table table-bordered"
                     HeaderStyle-BackColor="#0b3b5f" HeaderStyle-ForeColor="White" />
-            </div>
-
-            <div class="card">
-                <h5>Resource Utilization (Fulfillment %)</h5>
-                <canvas id="chartFulfillment" width="**220**" height="**140**"></canvas>
             </div>
 
             <div class="card">
@@ -52,31 +65,38 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
-        // Severity Chart
-        var ctx1 = document.getElementById('chartSeverity').getContext('2d');
+         var ctx1 = document.getElementById('chartSeverity').getContext('2d');
         new Chart(ctx1, {
             type: 'bar',
             data: {
-                labels: ['Low','Medium','High','Critical'],
+                labels: ['Low', 'Medium', 'High', 'Critical'],
                 datasets: [{
                     label: 'Incident Count',
                     data: [<asp:Literal ID="litSevData" runat="server" />],
-                    backgroundColor: ['#85c1e9','#2e86c1','#1a5276','#0b3b5f']
+                    backgroundColor: ['#85c1e9', '#2e86c1', '#1a5276', '#0b3b5f']
                 }]
             },
-            options: { responsive: true }
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } }
+            }
         });
 
-        // Fulfillment Chart
         var ctx2 = document.getElementById('chartFulfillment').getContext('2d');
         new Chart(ctx2, {
             type: 'doughnut',
             data: {
-                labels: ['Fulfilled','Pending'],
+                labels: ['Fulfilled', 'Pending'],
                 datasets: [{
                     data: [<asp:Literal ID="litFulfillData" runat="server" />],
-                    backgroundColor: ['#28a745','#ffc107']
+                    backgroundColor: ['#28a745', '#ffc107']
                 }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { position: 'bottom' } }
             }
         });
     </script>

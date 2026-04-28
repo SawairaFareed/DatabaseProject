@@ -13,17 +13,19 @@ namespace DisasterProject
             if (Session["UserID"] == null)
                 Response.Redirect("Login.aspx");
 
+            string role = Session["Role"].ToString();
+            if (role != "Administrator" && role != "Field Officer")
+                Response.Redirect("Dashboard.aspx");
+
             if (!IsPostBack)
                 LoadAssignments();
         }
-
         private void LoadAssignments()
         {
             string connString = ConfigurationManager.ConnectionStrings["DisasterDB"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                // For simplicity, show all active assignments (ideally filtered by logged-in field officer)
-                string query = @"SELECT ta.AssignmentID, rt.TeamName, er.Location AS IncidentLocation, 
+               string query = @"SELECT ta.AssignmentID, rt.TeamName, er.Location AS IncidentLocation, 
                                         er.DisasterType, ta.AssignedAt, ta.AssignmentStatus
                                  FROM TEAM_ASSIGNMENTS ta
                                  JOIN RESCUE_TEAMS rt ON ta.TeamID = rt.TeamID

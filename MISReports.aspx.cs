@@ -15,7 +15,6 @@ namespace DisasterProject
             if (!IsPostBack)
                 LoadReports();
         }
-
         private object GetScalar(string query)
         {
             string connString = ConfigurationManager.ConnectionStrings["DisasterDB"].ConnectionString;

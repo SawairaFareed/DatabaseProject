@@ -100,15 +100,15 @@
 
             <!-- Charts -->
             <div class="charts-row">
-                <div class="chart-box">
-                    <h5>Incidents by Disaster Type</h5>
-                    <canvas id="chartIncidents" width="250" height="160"></canvas>
-                </div>
-                <div class="chart-box">
-                    <h5>Resource Fulfillment</h5>
-                    <canvas id="chartResources" width="250" height="160"></canvas>
-                </div>
-            </div>
+    <div class="chart-box" style="max-width:350px; margin:0 auto;">
+        <h5>Incidents by Disaster Type</h5>
+        <canvas id="chartIncidents" width="200" height="130"></canvas>
+    </div>
+    <div class="chart-box" style="max-width:350px; margin:0 auto;">
+        <h5>Resource Fulfillment</h5>
+        <canvas id="chartResources" width="200" height="130"></canvas>
+    </div>
+</div>
 
             <!-- Recent Reports -->
             <div class="table-box">
@@ -145,6 +145,7 @@
                 }]
             }
         });
+        var chartOptions = { responsive: true, maintainAspectRatio: false };
     </script>
 </body>
 </html>

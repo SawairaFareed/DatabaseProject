@@ -13,10 +13,13 @@ namespace DisasterProject
             if (Session["UserID"] == null)
                 Response.Redirect("Login.aspx");
 
+            string role = Session["Role"].ToString();
+            if (role != "Administrator" && role != "Warehouse Manager")
+                Response.Redirect("Dashboard.aspx");
+
             if (!IsPostBack)
                 LoadInventory("All");
         }
-
         protected void ddlFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadInventory(ddlFilter.SelectedValue);
