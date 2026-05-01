@@ -62,8 +62,15 @@ namespace DisasterProject
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 return;
             }
+            decimal amount;
+            if (!decimal.TryParse(txtAmount.Text, out amount) || amount <= 0)
+            {
+                lblMessage.Text = "Please enter a valid positive amount.";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
 
-            decimal amount = Convert.ToDecimal(txtAmount.Text);
+        
             string type = ddlType.SelectedValue;
             string desc = txtDescription.Text.Trim();
             string incidentId = string.IsNullOrEmpty(ddlIncident.SelectedValue) ? "NULL" : ddlIncident.SelectedValue;

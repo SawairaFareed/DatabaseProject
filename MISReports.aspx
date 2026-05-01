@@ -11,17 +11,9 @@
         .topbar h3 { margin: 0; }
         .topbar a { color: #ffcccc; text-decoration: none; }
         .container-main { padding: 30px; }
-        .charts-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .chart-box {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            flex: 1;
-            min-width: 280px;
-            max-width: 380px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            overflow: hidden;           
-        }
+
+        .charts-row { display: flex; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; justify-content: center; }
+        .chart-box { background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 300px; max-width: 450px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 10px; }
         .chart-box h5 { color: #0b3b5f; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
         .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 25px; }
         .card h5 { color: #0b3b5f; font-weight: bold; }

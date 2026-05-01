@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Web.UI;
 
 namespace DisasterProject
@@ -16,8 +17,17 @@ namespace DisasterProject
                 return;
             }
 
-            lblUserName.Text = Session["FullName"].ToString();
-            lblRole.Text = Session["Role"].ToString();
+            lblUserName.Text = (Session["FullName"] ?? string.Empty).ToString();
+            lblRole.Text = (Session["Role"] ?? string.Empty).ToString();
+
+            string role = (Session["Role"] ?? string.Empty).ToString();
+            grpReports.Visible = (role == "Administrator" || role == "Emergency Operator");
+            grpResources.Visible = (role == "Administrator" || role == "Warehouse Manager");
+            grpTeams.Visible = (role == "Administrator" || role == "Emergency Operator");
+            grpFinance.Visible = (role == "Administrator" || role == "Finance Officer");
+            grpAdmin.Visible = (role == "Administrator");
+            grpStatus.Visible = true;                                                      // sab dekh sakte hain (MIS Reports)
+            grpTeamStatus.Visible = (role == "Administrator" || role == "Field Officer"); // sirf Admin aur Field Officer
 
             if (!IsPostBack)
                 LoadDashboard();
@@ -37,7 +47,7 @@ namespace DisasterProject
             }
         }
 
-        private object GetScalar(string query)
+        private int GetScalarInt(string query)
         {
             string connString = ConfigurationManager.ConnectionStrings["DisasterDB"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connString))
@@ -45,48 +55,41 @@ namespace DisasterProject
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    return cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar();
+                    if (result == null || result == DBNull.Value)
+                        return 0;
+                    return Convert.ToInt32(result);
                 }
             }
         }
 
         private void LoadDashboard()
         {
-            // Open Incidents
-            lblOpenIncidents.Text = GetScalar("SELECT COUNT(*) FROM EMERGENCY_REPORTS WHERE Status IN ('Open','In-Progress')").ToString();
+            lblOpenIncidents.Text = GetScalarInt("SELECT COUNT(*) FROM EMERGENCY_REPORTS WHERE Status IN ('Open','In-Progress')").ToString();
+            lblAvailableTeams.Text = GetScalarInt("SELECT COUNT(*) FROM RESCUE_TEAMS WHERE AvailabilityStatus = 'Available'").ToString();
+            lblLowStock.Text = GetScalarInt("SELECT COUNT(*) FROM RESOURCES WHERE QuantityAvailable < ThresholdLevel").ToString();
+            lblPendingApprovals.Text = GetScalarInt("SELECT COUNT(*) FROM APPROVAL_REQUESTS WHERE Status = 'Pending'").ToString();
 
-            // Available Teams
-            lblAvailableTeams.Text = GetScalar("SELECT COUNT(*) FROM RESCUE_TEAMS WHERE AvailabilityStatus = 'Available'").ToString();
-
-            // Low Stock
-            lblLowStock.Text = GetScalar(@"
-                SELECT COUNT(*) FROM RESOURCES 
-                WHERE QuantityAvailable < ThresholdLevel").ToString();
-
-            // Pending Approvals
-            lblPendingApprovals.Text = GetScalar("SELECT COUNT(*) FROM APPROVAL_REQUESTS WHERE Status = 'Pending'").ToString();
-
-            // Chart Data - Incidents by Type
             DataTable dtIncidents = GetData("SELECT DisasterType, COUNT(*) AS Count FROM EMERGENCY_REPORTS GROUP BY DisasterType");
-            string labels = "", data = "";
+            var labelsBuilder = new StringBuilder();
+            var dataBuilder = new StringBuilder();
             foreach (DataRow row in dtIncidents.Rows)
             {
-                labels += "'" + row["DisasterType"] + "',";
-                data += row["Count"] + ",";
+                var label = row["DisasterType"] == DBNull.Value ? "Unknown" : row["DisasterType"].ToString();
+                label = label.Replace("'", "\\'");
+                labelsBuilder.AppendFormat("'{0}',", label);
+                dataBuilder.AppendFormat("{0},", row["Count"]);
             }
-            litChartLabels.Text = labels.TrimEnd(',');
-            litChartData.Text = data.TrimEnd(',');
+            litChartLabels.Text = labelsBuilder.Length > 0 ? labelsBuilder.ToString().TrimEnd(',') : string.Empty;
+            litChartData.Text = dataBuilder.Length > 0 ? dataBuilder.ToString().TrimEnd(',') : string.Empty;
 
-            // Chart Data - Resource Fulfillment
+            int dispatched = GetScalarInt("SELECT COUNT(*) FROM RESOURCE_ALLOCATIONS WHERE Status='Dispatched'");
+            int pending = GetScalarInt("SELECT COUNT(*) FROM RESOURCE_ALLOCATIONS WHERE Status='Pending'");
+            int approved = GetScalarInt("SELECT COUNT(*) FROM RESOURCE_ALLOCATIONS WHERE Status='Approved'");
             litResLabels.Text = "'Dispatched','Pending','Approved'";
-            litResData.Text = GetScalar("SELECT COUNT(*) FROM RESOURCE_ALLOCATIONS WHERE Status='Dispatched'") + "," +
-                              GetScalar("SELECT COUNT(*) FROM RESOURCE_ALLOCATIONS WHERE Status='Pending'") + "," +
-                              GetScalar("SELECT COUNT(*) FROM RESOURCE_ALLOCATIONS WHERE Status='Approved'");
+            litResData.Text = $"{dispatched},{pending},{approved}";
 
-            // Recent Reports
-            gvRecentReports.DataSource = GetData(@"SELECT TOP 10 ReportID, Location, DisasterType, SeverityLevel, 
-                                                   CONVERT(varchar, ReportTime, 120) AS ReportTime, Status 
-                                                   FROM EMERGENCY_REPORTS ORDER BY ReportTime DESC");
+            gvRecentReports.DataSource = GetData("SELECT TOP 10 ReportID, Location, DisasterType, SeverityLevel, CONVERT(varchar, ReportTime, 120) AS ReportTime, Status FROM EMERGENCY_REPORTS ORDER BY ReportTime DESC");
             gvRecentReports.DataBind();
         }
     }

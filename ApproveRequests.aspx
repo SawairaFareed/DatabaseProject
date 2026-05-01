@@ -33,7 +33,8 @@
             <div class="card">
                 <h5>Pending Approvals</h5>
                 <asp:GridView ID="gvPending" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" 
-                    OnRowCommand="gvPending_RowCommand" DataKeyNames="ApprovalID">
+                    OnRowCommand="gvPending_RowCommand" DataKeyNames="ApprovalID"
+                     HeaderStyle-BackColor="#0b3b5f" HeaderStyle-ForeColor="White">
                     <Columns>
                         <asp:BoundField DataField="ApprovalID" HeaderText="ID" />
                         <asp:BoundField DataField="RequestType" HeaderText="Request Type" />
