@@ -98,9 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AddHospital.aspx" />
+    <Content Include="AddPatient.aspx" />
     <Content Include="AddResource.aspx" />
     <Content Include="AddRescueTeam.aspx" />
     <Content Include="EmergencyReports.aspx" />
+    <Content Include="HospitalStatus.aspx" />
     <Content Include="RegisterUser.aspx" />
     <Content Include="MISReports.aspx" />
     <Content Include="AuditLogs.aspx" />
@@ -196,6 +199,20 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddHospital.aspx.cs">
+      <DependentUpon>AddHospital.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddHospital.aspx.designer.cs">
+      <DependentUpon>AddHospital.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddPatient.aspx.cs">
+      <DependentUpon>AddPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddPatient.aspx.designer.cs">
+      <DependentUpon>AddPatient.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddResource.aspx.cs">
       <DependentUpon>AddResource.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +233,13 @@
     </Compile>
     <Compile Include="EmergencyReports.aspx.designer.cs">
       <DependentUpon>EmergencyReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HospitalStatus.aspx.cs">
+      <DependentUpon>HospitalStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HospitalStatus.aspx.designer.cs">
+      <DependentUpon>HospitalStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegisterUser.aspx.cs">
       <DependentUpon>RegisterUser.aspx</DependentUpon>

@@ -62,7 +62,7 @@ namespace DisasterProject
                 }
             }
         }
-
+         
         private void LoadDashboard()
         {
             lblOpenIncidents.Text = GetScalarInt("SELECT COUNT(*) FROM EMERGENCY_REPORTS WHERE Status IN ('Open','In-Progress')").ToString();

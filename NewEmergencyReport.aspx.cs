@@ -8,17 +8,10 @@ namespace DisasterProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserID"] == null)
-                Response.Redirect("Login.aspx");
-
-            string role = Session["Role"].ToString();
-            if (role != "Administrator" && role != "Emergency Operator")
-                Response.Redirect("Dashboard.aspx");
-
-            if (!IsPostBack)
-            {
-            }
+            // Public access allowed — citizens can report without login
+            // No redirect to Login.aspx
         }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             string location = txtLocation.Text.Trim();
@@ -41,7 +34,13 @@ namespace DisasterProject
                 cmd.Parameters.AddWithValue("@loc", location);
                 cmd.Parameters.AddWithValue("@type", disasterType);
                 cmd.Parameters.AddWithValue("@sev", severity);
-                cmd.Parameters.AddWithValue("@user", Session["UserID"].ToString());
+
+                // If logged in, use UserID. If public (citizen), store NULL.
+                if (Session["UserID"] != null)
+                    cmd.Parameters.AddWithValue("@user", Session["UserID"].ToString());
+                else
+                    cmd.Parameters.AddWithValue("@user", DBNull.Value);
+
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -55,7 +54,11 @@ namespace DisasterProject
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Dashboard.aspx");
+            // If logged in, go to Dashboard. If public, go to Login.
+            if (Session["UserID"] != null)
+                Response.Redirect("Dashboard.aspx");
+            else
+                Response.Redirect("Login.aspx");
         }
     }
 }

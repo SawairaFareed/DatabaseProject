@@ -43,6 +43,7 @@
             <asp:Button ID="btnLogin" runat="server" Text="SIGN IN" CssClass="btn-login" OnClick="btnLogin_Click" />
 
             <a href="RegisterUser.aspx" class="register-link">Not registered? Register Now</a>
+        <a href="NewEmergencyReport.aspx" style="color:red; font-weight:bold; display:block; text-align:right; margin-top:15px; text-decoration:none;">⚠️ <span onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Report Emergency</span></a>
         </div>
     </form>
 </body>

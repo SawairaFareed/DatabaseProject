@@ -72,10 +72,13 @@
                     <b>🔒 Admin</b>
                     <a href="ApproveRequests.aspx">Approvals</a>
                     <a href="AuditLogs.aspx">Audit Logs</a>
+                    <a href="AddHospital.aspx">Add Hospital</a>
+                    <a href="AddPatient.aspx">Admit Patient</a>
                 </div>
                 <div class="link-group" id="grpStatus" runat="server">
                     <b>📊 Reports & Status</b>
                     <a href="MISReports.aspx">MIS Reports</a>
+                    <a href="HospitalStatus.aspx">Hospital Status</a>
                 </div>
                 <div class="link-group" id="grpTeamStatus" runat="server">
                     <b>🔄 Team Status</b>
@@ -127,10 +130,10 @@
 new Chart(ctx1, {
     type: 'bar',
     data: {
-        labels: [<asp:Literal ID="litChartLabels" runat="server"></asp:Literal>],
+        labels: [<asp:Literal ID = "litChartLabels" runat = "server" > </asp:Literal>],
         datasets: [{
             label: 'Incidents',
-            data: [<asp:Literal ID="litChartData" runat="server"></asp:Literal>],
+            data: [<asp:Literal ID = "litChartData" runat = "server" > </asp:Literal>],
             backgroundColor: ['#0b3b5f', '#1a5276', '#2e86c1', '#85c1e9']
         }]
     }
@@ -139,9 +142,9 @@ var ctx2 = document.getElementById('chartResources').getContext('2d');
 new Chart(ctx2, {
     type: 'doughnut',
     data: {
-        labels: [<asp:Literal ID="litResLabels" runat="server"></asp:Literal>],
+        labels: [<asp:Literal ID = "litResLabels" runat = "server" > </asp:Literal>],
         datasets: [{
-            data: [<asp:Literal ID="litResData" runat="server"></asp:Literal>],
+            data: [<asp:Literal ID = "litResData" runat = "server" > </asp:Literal>],
             backgroundColor: ['#0b3b5f', '#1a5276', '#2e86c1', '#85c1e9', '#aed6f1']
         }]
     }
