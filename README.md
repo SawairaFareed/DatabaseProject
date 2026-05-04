@@ -368,6 +368,11 @@ Potential future upgrades include:
 - 🔐 JWT Authentication & APIs
 
 ---
+## 🎥 Project Demonstration Vedio :
+
+A short walkthrough of the system is available below:
+
+👉 [Watch the Demo Video](https://drive.google.com/file/d/1gyFh3iyCyqHXN2ep2UKxle0qcKQWIlmn/view?usp=sharing)
 
 # 🔥 Repository Highlights
 
